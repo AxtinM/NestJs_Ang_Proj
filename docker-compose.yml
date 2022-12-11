@@ -1,0 +1,13 @@
+version: '6.0'
+services:
+  mongo_db:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pwdroot
+    ports:
+      - 2717:27017
+    volumes:
+      - mongo_data_db:/data/ang_proj
+volumes:
+  mongo_data_db:
