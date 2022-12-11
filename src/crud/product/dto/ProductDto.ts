@@ -1,4 +1,6 @@
+import { Transform } from 'class-transformer';
 import { IsNumber, IsString } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class CreateProductDto {
   @IsString()
@@ -25,6 +27,7 @@ export class UpdateProductDto {
   description?: string;
 
   @IsString()
+  //@Transform((value) => new Types.ObjectId(value))
   category?: string;
 
   @IsNumber()
