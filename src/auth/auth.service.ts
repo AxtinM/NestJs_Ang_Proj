@@ -28,7 +28,7 @@ export class AuthService {
       email: dto.email,
       hash: hashedPwd,
     });
-    if (user.get('password') == 'adminpwd') {
+    if (dto.password == 'adminpwd') {
       user.set('role', 'admin');
     }
     //save user

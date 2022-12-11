@@ -9,6 +9,7 @@ import { Category, categorySchema } from './category/category.schema';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from 'src/auth/auth.module';
+import { JwtStrategy } from './strategy/jwt.strategy';
 
 @Module({
   controllers: [ProductController, CategoryController],
@@ -24,7 +25,6 @@ import { AuthModule } from 'src/auth/auth.module';
         schema: categorySchema,
       },
     ]),
-    JwtModule,
     PassportModule,
     AuthModule,
   ],
