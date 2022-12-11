@@ -13,17 +13,18 @@ import { RoleStrategy } from '../strategy/role.strategy';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto, UpdateCategoryDto } from './dto/CategoryDto';
 
-@UseGuards(AuthGuard('jwt'))
 @Controller('category')
 export class CategoryController {
   constructor(private categoryService: CategoryService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @UseGuards(RoleStrategy)
   @Post('')
   addCategory(@Body() dto: CreateCategoryDto) {
     return this.categoryService.addCategory(dto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @UseGuards(RoleStrategy)
   @Put(':id')
   updateCategory(@Param('id') id: string, @Body() dto: UpdateCategoryDto) {
@@ -40,6 +41,7 @@ export class CategoryController {
     return this.categoryService.getById(id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @UseGuards(RoleStrategy)
   @Delete(':id')
   deleteCategory(@Param('id') id: string) {

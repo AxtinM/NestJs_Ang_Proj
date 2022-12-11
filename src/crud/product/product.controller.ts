@@ -6,7 +6,10 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
 import { CreateProductDto, UpdateProductDto } from './dto/ProductDto';
 import { ProductService } from './product.service';
 
@@ -33,6 +36,7 @@ export class ProductController {
     return this.productService.updateProduct(id, dto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   deleteProduct(@Param('id') id: string) {
     return this.productService.deleteProduct(id);
