@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Product } from '../product/product.schema';
 import { Category } from './category.schema';
 import { CreateCategoryDto, UpdateCategoryDto } from './dto/CategoryDto';
@@ -12,7 +12,9 @@ export class CategoryService {
   ) {}
 
   async addCategory(dto: CreateCategoryDto) {
+    const _id = new Types.ObjectId();
     const category = new this.categoryModel({
+      _id,
       ...dto,
     });
 
@@ -22,15 +24,22 @@ export class CategoryService {
   }
 
   updateCategory(id: string, dto: UpdateCategoryDto) {
-    const category = this.categoryModel.findByIdAndUpdate(id, dto, {
-      new: true,
-    });
+    const category = this.categoryModel.findByIdAndUpdate(
+      new Types.ObjectId(id),
+      dto,
+      {
+        new: true,
+      },
+    );
 
     return category;
   }
 
   deleteCategory(id: string) {
-    const category = this.categoryModel.findByIdAndDelete(id);
+    console.log(id);
+    const category = this.categoryModel.findByIdAndDelete(
+      new Types.ObjectId(id),
+    );
     return category;
   }
 

@@ -19,9 +19,6 @@ export class CreateProductDto {
 
 export class UpdateProductDto {
   @IsString()
-  _id: string;
-
-  @IsString()
   name?: string;
 
   @IsString()

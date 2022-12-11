@@ -6,10 +6,9 @@ import { ProductService } from './product/product.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Product, productSchema } from './product/product.schema';
 import { Category, categorySchema } from './category/category.schema';
-import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from 'src/auth/auth.module';
-import { JwtStrategy } from './strategy/jwt.strategy';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   controllers: [ProductController, CategoryController],
@@ -27,6 +26,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
     ]),
     PassportModule,
     AuthModule,
+    JwtModule.register({}),
   ],
 })
 export class CrudModule {}

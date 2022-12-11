@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CreateProductDto, UpdateProductDto } from './dto/ProductDto';
 import { ProductService } from './product.service';
 

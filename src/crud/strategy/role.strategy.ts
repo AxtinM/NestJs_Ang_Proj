@@ -1,19 +1,20 @@
-import { UnauthorizedException } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
-import { Strategy } from 'passport-jwt';
+import {
+  Injectable,
+  UnauthorizedException,
+  ExecutionContext,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
-export class RoleStrategy extends PassportStrategy(Strategy, 'role') {
-  constructor() {
-    super(async (payload, done) => {
-      try {
-        const user = payload.user;
-        if (user && user.role == 'admin') {
-          return done(null, user);
-        }
-        return done(new UnauthorizedException(), false);
-      } catch (error) {
-        return done(error, false);
-      }
-    });
+@Injectable()
+export class RoleStrategy extends AuthGuard('role') {
+  canActivate(ctx: ExecutionContext) {
+    const request = ctx.switchToHttp().getRequest();
+    const user = request.user;
+
+    if (user && user.role == 'admin') {
+      return true;
+    }
+
+    throw new UnauthorizedException();
   }
 }

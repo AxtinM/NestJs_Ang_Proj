@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, SchemaTypes, Types } from 'mongoose';
 import { Category } from '../category/category.schema';
 import { CreateProductDto, UpdateProductDto } from './dto/ProductDto';
 import { Product } from './product.schema';
@@ -32,12 +32,15 @@ export class ProductService {
     });
 
     await product.save();
-    (await category).products.push(product._id);
+    (await category).products.push(product);
 
     return product;
   }
 
   async updateProduct(id: string, dto: UpdateProductDto) {
-    return 'updated';
+    const newProduct = this.productModel.findByIdAndUpdate(
+      new Types.ObjectId(id),
+      dto,
+    );
   }
 }

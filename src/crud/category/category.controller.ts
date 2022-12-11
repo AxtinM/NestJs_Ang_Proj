@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -8,6 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { RoleStrategy } from '../strategy/role.strategy';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto, UpdateCategoryDto } from './dto/CategoryDto';
 
@@ -16,13 +18,13 @@ import { CreateCategoryDto, UpdateCategoryDto } from './dto/CategoryDto';
 export class CategoryController {
   constructor(private categoryService: CategoryService) {}
 
-  @UseGuards(AuthGuard('role'))
+  @UseGuards(RoleStrategy)
   @Post('')
   addCategory(@Body() dto: CreateCategoryDto) {
     return this.categoryService.addCategory(dto);
   }
 
-  @UseGuards(AuthGuard('role'))
+  @UseGuards(RoleStrategy)
   @Put(':id')
   updateCategory(@Param('id') id: string, @Body() dto: UpdateCategoryDto) {
     return this.categoryService.updateCategory(id, dto);
@@ -36,5 +38,11 @@ export class CategoryController {
   @Get(':id')
   getById(@Param('id') id: string) {
     return this.categoryService.getById(id);
+  }
+
+  @UseGuards(RoleStrategy)
+  @Delete(':id')
+  deleteCategory(@Param('id') id: string) {
+    return this.categoryService.deleteCategory(id);
   }
 }
