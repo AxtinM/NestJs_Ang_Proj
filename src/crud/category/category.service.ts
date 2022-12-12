@@ -44,12 +44,15 @@ export class CategoryService {
   }
 
   getAll() {
-    const categories = this.categoryModel.find({}).populate('products');
+    const categories = this.categoryModel.find({}).populate('products').exec();
     return categories;
   }
 
   getById(id: string) {
-    const category = this.categoryModel.findById(id).populate('products');
+    const category = this.categoryModel
+      .findById(new Types.ObjectId(id))
+      .populate('products')
+      .exec();
     return category;
   }
 }
