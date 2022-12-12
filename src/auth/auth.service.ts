@@ -35,7 +35,6 @@ export class AuthService {
     await user.save();
     const payload: userType = {
       sub: user._id,
-      name: user.name,
       email: user.email,
       role: user.role,
     };
@@ -56,7 +55,6 @@ export class AuthService {
       //prepare payload
       const payload: userType = {
         sub: user._id,
-        name: user.name,
         email: user.email,
         role: user.role,
       };

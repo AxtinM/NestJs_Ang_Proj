@@ -54,9 +54,6 @@ export class ProductService {
       },
     );
 
-    console.log('DTO\n', dto);
-    console.log('\nnewProduct\n', newProduct);
-
     return newProduct;
   }
 

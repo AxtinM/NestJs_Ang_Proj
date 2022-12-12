@@ -21,7 +21,8 @@ export class LoginDto {
 
 export interface userType {
   sub: number;
-  name: string;
+  name?: string;
   email: string;
   role?: string;
+  user?: any;
 }
